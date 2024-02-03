@@ -57,7 +57,7 @@ page 50122 "Personal Info"
             part(Details; CountryPage)
             {
                 ApplicationArea = all;
-                // SubPageLink 
+                SubPageLink = Country = field(Country);
             }
         }
 
