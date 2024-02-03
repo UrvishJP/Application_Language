@@ -5,6 +5,7 @@ page 50119 "Student Info Page"
     PageType = List;
     SourceTable = "Student Information";
     UsageCategory = Lists;
+    CardPageId = "Personal Info";
 
     layout
     {
@@ -24,15 +25,15 @@ page 50119 "Student Info Page"
                 field(Country; Rec.Country)
                 {
                     ToolTip = 'Specifies the value of the Country field.';
-                    Editable = false;
-                    trigger OnDrillDown()
-                    var
-                        Country: Record Country;
-                    begin
-                        Country.Reset();
-                        Country.SetRange(Country, Rec.Country);
-                        Page.RunModal(Page::CountrytoState, Country);
-                    end;
+                    // Editable = false;
+                    // trigger OnDrillDown()
+                    // var
+                    //     Country: Record Country;
+                    // begin
+                    //     Country.Reset();
+                    //     Country.SetRange(Country, Rec.Country);
+                    //     Page.RunModal(Page::CountrytoState, Country);
+                    // end;
                 }
 
                 field("Fav Activity"; Rec."Fav Activity")

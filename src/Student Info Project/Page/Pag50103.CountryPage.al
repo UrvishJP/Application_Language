@@ -5,7 +5,7 @@ page 50103 CountryPage
     PageType = ListPart;
     SourceTable = Country;
     UsageCategory = Lists;
-    
+
     layout
     {
         area(content)

@@ -2,7 +2,7 @@ table 50121 Country
 {
     Caption = 'Country';
     DataClassification = ToBeClassified;
-    
+    LookupPageId = CountryPage;
     fields
     {
         field(1; Country; Text[20])
@@ -20,9 +20,16 @@ table 50121 Country
     }
     keys
     {
-        key(PK; Country, State, City)
+        key(PK; Country)
         {
             Clustered = true;
+        }
+    }
+    fieldgroups
+    {
+        fieldgroup(Dropdown; Country, State)
+        {
+
         }
     }
 }

@@ -9,16 +9,18 @@ table 50118 "Student Information"
         field(1; "Enrollment No."; Integer)
         {
             Caption = 'Enrollment No.';
-            TableRelation = Enrollment;
+            
 
         }
         field(2; Name; Text[20])
         {
             Caption = 'Name';
+            // TableRelation = Enrollment;
         }
-        field(3; Country; Code[20])
+        field(3; Country; Text[20])
         {
             Caption = 'Country';
+            TableRelation = Country;
 
 
         }
@@ -61,12 +63,12 @@ table 50118 "Student Information"
         field(11; avg; Decimal)
         {
             FieldClass = FlowField;
-            CalcFormula = average("Student Information"."Fees per term" where (Name = field(Name)));
+            CalcFormula = average("Student Information"."Fees per term" where(Name = field(Name)));
         }
     }
     keys
     {
-        key(PK; "Enrollment No.")
+        key(PK;  "Enrollment No.")
         {
             Clustered = true;
         }
