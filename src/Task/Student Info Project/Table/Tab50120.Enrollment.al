@@ -3,6 +3,7 @@ table 50120 Enrollment
     Caption = 'Enrollment';
     DataClassification = ToBeClassified;
     LookupPageId = "Enrollment Page";
+
     
     fields
     {

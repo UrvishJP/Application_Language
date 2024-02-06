@@ -2,6 +2,8 @@ table 50118 "Student Information"
 {
     Caption = 'Student Information';
     DataClassification = ToBeClassified;
+    DrillDownPageId = "Personal Info";
+
 
 
     fields
@@ -11,11 +13,13 @@ table 50118 "Student Information"
             Caption = 'Enrollment No.';
             
 
+
         }
         field(2; Name; Text[20])
         {
             Caption = 'Name';
-            // TableRelation = Enrollment;
+            // ExtendedDatatype = URL;
+
         }
         field(3; Country; Text[20])
         {
@@ -27,6 +31,7 @@ table 50118 "Student Information"
         field(4; "Phone no."; Text[20])
         {
             Caption = 'Phone no.';
+            CharAllowed = 'ADWZ';
         }
         field(5; Gender; Option)
         {
@@ -48,6 +53,10 @@ table 50118 "Student Information"
         field(10; "Fees per term"; Decimal)
         {
             Caption = 'Fees per term';
+            // AutoFormatType = 10;
+            // AutoFormatExpression = '1, USD';
+
+            // BlankNumbers = DontBlank;
 
 
 
@@ -68,7 +77,7 @@ table 50118 "Student Information"
     }
     keys
     {
-        key(PK;  "Enrollment No.")
+        key(PK; "Enrollment No.")
         {
             Clustered = true;
         }

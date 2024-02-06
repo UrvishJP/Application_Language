@@ -7,6 +7,7 @@ page 50119 "Student Info Page"
     UsageCategory = Lists;
     CardPageId = "Personal Info";
 
+
     layout
     {
         area(content)
@@ -16,7 +17,6 @@ page 50119 "Student Info Page"
                 field("Enrollment No."; Rec."Enrollment No.")
                 {
                     ToolTip = 'Specifies the value of the Enrollment No. field.';
-
                 }
                 field(Name; Rec.Name)
                 {
