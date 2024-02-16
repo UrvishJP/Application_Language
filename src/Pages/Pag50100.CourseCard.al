@@ -5,6 +5,7 @@ page 50100 CourseCard
     PageType = Card;
     SourceTable = Course;
     UsageCategory = Documents;
+    PromotedActionCategories = '1,2,3,Convert String, Copy String';
 
     layout
     {
@@ -138,6 +139,9 @@ page 50100 CourseCard
             }
             action("Convert String")
             {
+                Promoted = true;
+                PromotedOnly = true;
+                PromotedCategory = Category4;
                 trigger OnAction()
 
                 begin
