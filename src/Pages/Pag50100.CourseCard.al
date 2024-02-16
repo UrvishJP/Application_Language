@@ -48,7 +48,6 @@ page 50100 CourseCard
                 }
                 field("Instructor Name"; Rec."Instructor Name")
                 {
-
                 }
             }
         }
@@ -67,6 +66,94 @@ page 50100 CourseCard
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
+            }
+            action("String Length")
+            {
+                trigger OnAction()
+
+                begin
+                    Message('String Length is : %1', StrLen(Format((Rec.Price))));
+                end;
+            }
+            action("String Menu")
+            {
+                trigger OnAction()
+
+                begin
+                    Message(Format(StrMenu('A, C')));
+                end;
+            }
+            action("SubString No")
+            {
+                trigger OnAction()
+
+                begin
+                    Message(StrSubstNo('%1 = %2', 1));
+                end;
+            }
+            action("Inc String")
+            {
+                trigger OnAction()
+
+                begin
+                    Message(IncStr(Rec.Name));
+                end;
+            }
+            action("Ins String")
+            {
+                trigger OnAction()
+
+                begin
+                    Message(InsStr(Rec.Name, 'QQ', 2));
+                end;
+            }
+            action("Max String Length")
+            {
+                trigger OnAction()
+
+                begin
+                    Message('%1', MaxStrLen(Rec.Name));
+                end;
+            }
+            action("Pad String")
+            {
+                trigger OnAction()
+
+                begin
+                    Message(PadStr(Rec.Name, 10, 'Q'));
+                end;
+            }
+            action("Copy String")
+            {
+                trigger OnAction()
+
+                begin
+                    Message(CopyStr(Rec.Name, 1, 3));
+                end;
+            }
+            action("Convert String")
+            {
+                trigger OnAction()
+
+                begin
+                    Message(ConvertStr(Rec.Name, 'x', 's'));
+                end;
+            }
+            action("UpperCase")
+            {
+                trigger OnAction()
+
+                begin
+                    Message(UpperCase(Rec.Name));
+                end;
+            }
+            action("LowerCase")
+            {
+                trigger OnAction()
+
+                begin
+                    Message(LowerCase(Rec.Name));
+                end;
             }
         }
     }

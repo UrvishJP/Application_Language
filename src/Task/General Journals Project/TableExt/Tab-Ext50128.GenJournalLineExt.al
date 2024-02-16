@@ -5,9 +5,7 @@ tableextension 50128 "Gen. Journal Line Ext" extends "Gen. Journal Line"
         field(50100; "Transaction_Type"; Enum "Transaction_Type")
         {
             Caption = 'Transaction Type';
-            DataClassification = ToBeClassified;
-
-           
+            DataClassification = ToBeClassified;         
         }
         modify("Document Type")
         {

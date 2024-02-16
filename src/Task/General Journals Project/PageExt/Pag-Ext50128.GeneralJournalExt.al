@@ -1,5 +1,5 @@
 pageextension 50128 "General Journal Ext" extends "General Journal"
-{
+{  
     layout
     {
 
@@ -10,10 +10,8 @@ pageextension 50128 "General Journal Ext" extends "General Journal"
                 ApplicationArea = All;
                 Editable = Rec."Document Type" = Rec."Document Type"::Payment;
 
-
             }
         }
-        
 
     }
 }
