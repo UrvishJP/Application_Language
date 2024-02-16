@@ -88,7 +88,12 @@ page 50100 CourseCard
                 trigger OnAction()
 
                 begin
-                    Message(StrSubstNo('%1 = %2', 1));
+                    // Message(StrSubstNo('%1 = %2', 1));
+                    // Message('%1 = %2', 1);
+
+                    Rec.FieldError(Code, StrSubstNo('%1 = %2', 1));
+                    //StrSubstNo only use with FieldError
+                    // Rec.FieldError(Code, '%1 = %2', 1);
                 end;
             }
             action("Inc String")
