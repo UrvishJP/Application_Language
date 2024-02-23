@@ -21,6 +21,8 @@ page 50119 "Student Info Page"
                 field(Name; Rec.Name)
                 {
                     ToolTip = 'Specifies the value of the Name field.';
+
+                    
                 }
                 field(Country; Rec.Country)
                 {

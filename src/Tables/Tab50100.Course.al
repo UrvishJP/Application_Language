@@ -1,7 +1,7 @@
 table 50100 Course
 {
     DataClassification = ToBeClassified;
-    LookupPageId = "DemoPage";
+    // LookupPageId = "DemoPage";
     DrillDownPageId = "DemoPage";
 
     fields

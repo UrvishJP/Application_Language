@@ -6,7 +6,7 @@ page 50101 CourseList
     SourceTable = Course;
     UsageCategory = Documents;
     Editable = false;
-    CardPageId = CourseCard;
+    // CardPageId = CourseCard;
 
     
     layout

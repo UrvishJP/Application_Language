@@ -2,7 +2,7 @@ page 50100 CourseCard
 {
     ApplicationArea = All;
     Caption = 'CourseCard';
-    PageType = Card;
+    PageType = List;
     SourceTable = Course;
     UsageCategory = Documents;
     PromotedActionCategories = '1,2,3,Convert String, Copy String';
@@ -11,7 +11,7 @@ page 50100 CourseCard
     {
         area(content)
         {
-            group(General)
+            repeater(General)
             {
                 Caption = 'General';
 
@@ -145,6 +145,8 @@ page 50100 CourseCard
                 trigger OnAction()
 
                 begin
+
+
                     Message(ConvertStr(Rec.Name, 'x', 's'));
                 end;
             }
@@ -166,6 +168,17 @@ page 50100 CourseCard
             }
         }
     }
+
+    trigger OnOpenPage()
+
+    begin
+        Rec.Reset();
+        // Rec.SetRange(Price,5);
+        Rec.SetFilter(Price,'>5');
+        // Rec.FindFirst();
+        // Rec.FindLast();
+        Rec.FindSet();
+    end;
 
 }
 

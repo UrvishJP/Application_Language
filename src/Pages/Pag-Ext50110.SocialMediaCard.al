@@ -1,5 +1,6 @@
 pageextension 50110 SocialMediaCard extends "Customer Card"
 {
+   
     layout
     {
         addafter(General)
@@ -23,3 +24,5 @@ pageextension 50110 SocialMediaCard extends "Customer Card"
         }
     }
 }
+
+
