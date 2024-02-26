@@ -144,8 +144,8 @@ page 50100 CourseCard
                 PromotedCategory = Category4;
                 trigger OnAction()
 
-                begin
 
+                begin
 
                     Message(ConvertStr(Rec.Name, 'x', 's'));
                 end;

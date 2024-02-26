@@ -2,6 +2,8 @@ table 50150 Student
 {
     Caption = 'Student';
     DataClassification = ToBeClassified;
+    
+
 
     fields
     {
@@ -9,11 +11,13 @@ table 50150 Student
         {
             Caption = 'ID';
             AutoIncrement = true;
+
         }
         field(2; Name; Text[25])
         {
             Caption = 'Name';
-
+            
+    
         }
         field(3; City; Text[25])
         {

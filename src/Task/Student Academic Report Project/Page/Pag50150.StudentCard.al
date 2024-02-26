@@ -58,7 +58,8 @@ page 50150 "Student Card"
 
                 trigger OnAction()
                 begin
-                    Report.RunModal(Report::"Academic Report");
+                    CurrPage.SetSelectionFilter(Rec);
+                    Report.RunModal(Report::"Academic Report",true,true,Rec);
                 end;
             }
         }

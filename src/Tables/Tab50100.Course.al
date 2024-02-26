@@ -66,7 +66,7 @@ table 50100 Course
         }
         field(120; "Instructor Name"; Text[100])
         {
-            Editable = false;
+            // Editable = false;
             FieldClass = FlowField;
             CalcFormula = Lookup(Resource.Name WHERE("No." = FIELD("Instructor Code")));
         }
