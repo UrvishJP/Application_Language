@@ -174,10 +174,10 @@ page 50100 CourseCard
     begin
         Rec.Reset();
         // Rec.SetRange(Price,5);
-        Rec.SetFilter(Price,'>5');
+        Rec.SetFilter(Price, '>5');
         // Rec.FindFirst();
         // Rec.FindLast();
-        Rec.FindSet();
+        // Rec.FindSet();
     end;
 
 }
