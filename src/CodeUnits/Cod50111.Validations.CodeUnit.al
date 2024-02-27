@@ -16,4 +16,6 @@ codeunit 50111 Validations
         if TextToVerify.Contains('+') then
             Message('A + sign has been found.');
     end;
+
+ 
 }

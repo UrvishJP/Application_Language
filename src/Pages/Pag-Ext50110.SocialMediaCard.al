@@ -1,6 +1,6 @@
 pageextension 50110 SocialMediaCard extends "Customer Card"
 {
-   
+
     layout
     {
         addafter(General)
@@ -11,18 +11,20 @@ pageextension 50110 SocialMediaCard extends "Customer Card"
             }
             field(Twitter; Rec.Twitter)
             {
-                
+                    
             }
             field(Instagram; Rec.Instagram)
             {
-                
+
             }
             field(LinkedIn; Rec.LinkedIn)
             {
-                
+
             }
         }
     }
+
+
 }
 
 

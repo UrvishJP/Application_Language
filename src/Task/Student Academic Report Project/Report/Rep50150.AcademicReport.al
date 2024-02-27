@@ -35,6 +35,10 @@ report 50150 "Academic Report"
             {
 
             }
+            column(EncodeStr; EncodeStr)
+            {
+
+            }
 
             dataitem(Result; Result)
             {
@@ -53,6 +57,17 @@ report 50150 "Academic Report"
                 }
 
             }
+            trigger OnAfterGetRecord()
+            var
+                BarcodeSym: Enum "Barcode Symbology 2D";
+                BarcodeProvider: Interface "Barcode Font Provider 2D";
+            begin
+
+                EncodeStr := "School Name";
+                BarcodeProvider := Enum::"Barcode Font Provider 2D"::IDAutomation2D;
+                BarcodeSym := Enum::"Barcode Symbology 2D"::"QR-Code";
+                EncodeStr := BarcodeProvider.EncodeFont(EncodeStr, BarcodeSym);
+            end;
         }
 
     }
@@ -65,4 +80,7 @@ report 50150 "Academic Report"
             LayoutFile = './src/Task/Student Academic Report Project/Report/Academic Report.RDL';
         }
     }
+
+    var
+        EncodeStr: Text;
 }

@@ -8,7 +8,9 @@ page 50101 CourseList
     Editable = false;
     // CardPageId = CourseCard;
 
-    
+
+
+
     layout
     {
         area(content)
@@ -19,17 +21,19 @@ page 50101 CourseList
 
                 field(Code; Rec.Code)
                 {
-                   
+        
+
                 }
                 field(Name; Rec.Name)
                 {
-                   
+
                 }
                 field(Description; Rec.Description)
                 {
-                   
+
                 }
             }
         }
     }
 }
+

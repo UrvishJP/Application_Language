@@ -5,6 +5,8 @@ page 50150 "Student Card"
     PageType = Card;
     SourceTable = Student;
     PromotedActionCategories = '1,2,3,Print Report';
+    Editable = false;
+    // ModifyAllowed = false;
 
     layout
     {

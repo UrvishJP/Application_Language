@@ -7,7 +7,10 @@ page 50151 "Student List"
     CardPageId = "Student Card";
     UsageCategory = Lists;
     PromotedActionCategories = '1,2,3,Print Report';
-    
+    // ModifyAllowed = false;
+    // Editable = false;
+
+
     layout
     {
         area(content)
@@ -15,7 +18,7 @@ page 50151 "Student List"
             repeater(General)
             {
                 Caption = 'General';
-                
+
                 field(ID; Rec.ID)
                 {
                     ToolTip = 'Specifies the value of the ID field.';
@@ -46,7 +49,7 @@ page 50151 "Student List"
                 }
             }
         }
-    
+
     }
     actions
     {
@@ -57,7 +60,7 @@ page 50151 "Student List"
                 ApplicationArea = All;
                 Promoted = true;
                 PromotedCategory = Category4;
-                
+
                 trigger OnAction()
                 begin
                     Report.RunModal(Report::"Academic Report");

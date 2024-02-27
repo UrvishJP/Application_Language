@@ -2,12 +2,11 @@ tableextension 50110 SocialMediaTableExt extends Customer
 {
 
 
-
     fields
     {
         field(50110; Facebook; Text[50])
         {
-
+           
         }
         field(50111; Twitter; Text[50])
         {
@@ -43,6 +42,8 @@ tableextension 50110 SocialMediaTableExt extends Customer
     // begin
     //     Message('OnInsert');
     // end;
+
+  
 
 
 }

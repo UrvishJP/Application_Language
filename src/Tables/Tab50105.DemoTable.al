@@ -78,7 +78,7 @@ table 50110 DemoTable
         field(3; Yash; Text[20])
         {
             Caption = 'Yash';
-            
+
         }
     }
     keys
