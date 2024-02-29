@@ -4,11 +4,16 @@ table 50100 Course
     // LookupPageId = "DemoPage";
     DrillDownPageId = "DemoPage";
 
+ 
+
+
+
     fields
     {
         field(10; Code; Code[10])
         {
             DataClassification = ToBeClassified;
+            
 
         }
         field(20; Name; Text[50])

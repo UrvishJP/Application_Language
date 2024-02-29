@@ -7,7 +7,8 @@ page 50101 CourseList
     UsageCategory = Documents;
     Editable = false;
     // CardPageId = CourseCard;
-
+    
+    
 
 
 
@@ -21,7 +22,6 @@ page 50101 CourseList
 
                 field(Code; Rec.Code)
                 {
-        
 
                 }
                 field(Name; Rec.Name)

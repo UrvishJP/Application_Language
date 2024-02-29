@@ -1,6 +1,6 @@
 tableextension 50110 SocialMediaTableExt extends Customer
 {
-
+    
 
     fields
     {
