@@ -10,7 +10,14 @@
   "help": "",
   "url": "",
   "logo": "",
-  "dependencies": [],
+  "dependencies": [
+    {
+      "id": "7a129d06-5fd6-4fb6-b82b-0bf539c779d0",
+      "publisher": "Microsoft",
+      "name": "_Exclude_Bank Deposits",
+      "version": "23.3.14876.15024"
+    }
+  ],
   "screenshots": [],
   "platform": "1.0.0.0",
   "application": "23.0.0.0",

@@ -22,15 +22,6 @@ table 50154 Result
         {
             Caption = 'Name';
 
-            // trigger OnLookup()
-            // var
-            //     StudentName: Record Student;
-            // begin
-            //     if (Page.RunModal(Page::"Student List", StudentName)) = Action::LookupOK then
-            //         Rec.Name := StudentName.Name;
-            //     Rec.Stream := StudentName.Stream;
-            // end;
-
         }
         field(3; Stream; Enum Stream)
         {
