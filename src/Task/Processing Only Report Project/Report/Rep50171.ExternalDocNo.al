@@ -6,6 +6,7 @@ report 50171 "External Doc No"
     ProcessingOnly = true;
 
     dataset
+    
     {
         dataitem(SalesInvoiceHeader; "Sales Invoice Header")
         {
