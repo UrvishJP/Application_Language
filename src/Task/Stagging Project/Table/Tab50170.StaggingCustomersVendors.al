@@ -15,6 +15,7 @@ table 50170 "Stagging Customers/Vendors"
         field(2; ABN; Integer)
         {
             Caption = 'ABN';
+
         }
         field(3; "ABN Divison Part No."; Integer)
         {
@@ -23,22 +24,27 @@ table 50170 "Stagging Customers/Vendors"
         field(4; ACN; Integer)
         {
             Caption = 'ACN';
+
         }
-        field(5; "No."; Integer)
+        field(5; "No."; Code[10])
         {
             Caption = 'No.';
+
         }
         field(6; Name; Text[25])
         {
             Caption = 'Name';
+
         }
-        field(7; "Phone No."; Integer)
+        field(7; "Phone No."; Text[10])
         {
             Caption = 'Phone No.';
+            Numeric = true;
         }
-        field(8; "E-mail"; Text[25])
+        field(8; "E-mail"; Text[50])
         {
             Caption = 'E-mail';
+
         }
         field(9; "Business Type"; Enum "Business Type")
         {
@@ -56,10 +62,12 @@ table 50170 "Stagging Customers/Vendors"
         field(12; Address; Text[50])
         {
             Caption = 'Address';
+
         }
         field(13; "Address 2"; Text[50])
         {
             Caption = 'Address 2';
+
         }
         field(14; "Country/Region Code"; Text[25])
         {
@@ -72,10 +80,12 @@ table 50170 "Stagging Customers/Vendors"
         field(16; R_Address; Text[50])
         {
             Caption = 'Address';
+
         }
         field(17; "R_Address 2"; Text[50])
         {
             Caption = 'Address 2';
+
         }
         field(18; "R_Country/Region Code"; Text[25])
         {
@@ -87,10 +97,10 @@ table 50170 "Stagging Customers/Vendors"
         }
         field(20; ID; Integer)
         {
-
+            AutoIncrement = true;
         }
     }
-    
+
     keys
     {
         key(PK; ID)
@@ -98,5 +108,11 @@ table 50170 "Stagging Customers/Vendors"
             Clustered = true;
         }
     }
+
+    var
+        // EmpID: Text[30];
+        regex: Codeunit Regex;
+        Pattern: Text;
+        email: Text[70];
 
 }

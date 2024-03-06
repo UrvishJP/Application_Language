@@ -6,6 +6,7 @@ page 50171 "Stagging - Cust/Vend"
     SourceTable = "Stagging Customers/Vendors";
     UsageCategory = Lists;
     DataCaptionFields = Type, ABN;
+    // DelayedInsert = true;
 
 
     layout
@@ -43,14 +44,38 @@ page 50171 "Stagging - Cust/Vend"
                 field(Name; Rec.Name)
                 {
                     ToolTip = 'Specifies the value of the Name field.';
+                    ShowMandatory = true;
+
                 }
                 field("Phone No."; Rec."Phone No.")
                 {
                     ToolTip = 'Specifies the value of the Phone No. field.';
+
+                    trigger OnValidate()
+
+                    begin
+                        if (StrLen(Rec."Phone No.") <> 10) then
+                            Error('Phone No. must be of 10 digits only.');
+                    end;
                 }
                 field("E-mail"; Rec."E-mail")
                 {
                     ToolTip = 'Specifies the value of the E-mail field.';
+
+                    trigger OnValidate()
+
+                    begin
+                        // if (StrLen(Rec."E-mail") > 6) and
+                        //     (Strpos(Rec."E-mail", '.') > Strpos(Rec."E-mail", '@')) and
+                        //     (Strpos(Rec."E-mail", '@') > 1) and
+                        //     (Strpos(Rec."E-mail", '.') < (Strlen(Rec."E-mail") - 2)) then
+                        //     Message('Perfect');
+
+                        // else
+                        //     Error('Invalid E-mail.');
+                    end;
+
+
                 }
                 field("Business Type"; Rec."Business Type")
                 {
@@ -59,6 +84,8 @@ page 50171 "Stagging - Cust/Vend"
                 field(Status; Rec.Status)
                 {
                     ToolTip = 'Specifies the value of the Status field.';
+
+
                 }
                 field("Reference No."; Rec."Reference No.")
                 {
@@ -113,6 +140,16 @@ page 50171 "Stagging - Cust/Vend"
             }
 
         }
+        area(FactBoxes)
+        {
+            part("Error Factbox"; "Error Factbox")
+            {
+                // SubPageLink = 
+                // Provider = "Error Factbox";
+                // SubPageLink = SystemId = field(SystemId);
+                ApplicationArea = all;
+            }
+        }
 
     }
 
@@ -141,23 +178,22 @@ page 50171 "Stagging - Cust/Vend"
         }
         area(Processing)
         {
-            // group(Condition)
-            // {
 
-            // }
             action(Validate)
             {
                 ApplicationArea = All;
                 Image = ViewCheck;
-
-
+                Enabled = Rec.Status = Rec.Status::Registered;
 
                 trigger OnAction()
-                var
-                    myInt: Integer;
+
                 begin
+                    ErrorFact.DeleteLines(Rec);
+                    ErrorFact.ValidateFields(Rec);
 
                 end;
+
+
             }
 
             action("Create Customer")
@@ -165,12 +201,31 @@ page 50171 "Stagging - Cust/Vend"
                 ApplicationArea = All;
                 Image = PersonInCharge;
                 Visible = Rec.Type = Rec.Type::Customer;
+                Enabled = Rec.Status = Rec.Status::Registered;
+                // RunPageOnRec = true;
+                // RunObject = Page "Customer Card";
+                // RunPageLink = Name = field(Name);
                 trigger OnAction()
                 var
-                    myInt: Integer;
+                    Cust_Rec: Record Customer;
+                    Answer: Boolean;
+
                 begin
 
+                    ErrorFact.ValidateFields(Rec);
 
+                    Answer := Dialog.Confirm('Do you want to create a new Customer for this record?');
+
+                    if (Answer = true) then begin
+                        Clear(Cust_Rec);
+                        Cust_Rec.Init();
+                        Cust_Rec."No." := Rec."No.";
+                        Cust_Rec.Name := Rec.Name;
+                        Cust_Rec.Insert();
+                        CurrPage.Close();
+                        Page.Run(Page::"Customer Card", Cust_Rec);
+
+                    end;
 
                 end;
 
@@ -180,15 +235,36 @@ page 50171 "Stagging - Cust/Vend"
                 ApplicationArea = All;
                 Image = PersonInCharge;
                 Visible = Rec.Type = Rec.Type::Vendor;
+                Enabled = Rec.Status = Rec.Status::Registered;
 
                 trigger OnAction()
                 var
-                    myInt: Integer;
+                    Cust_Rec: Record Customer;
+                    Answer: Boolean;
+
                 begin
+
+                    ErrorFact.ValidateFields(Rec);
+
+                    Answer := Dialog.Confirm('Do you want to create a new Vendor for this record?');
+
+                    if (Answer = true) then begin
+                        Clear(Cust_Rec);
+                        Cust_Rec.Init();
+                        Cust_Rec."No." := Rec."No.";
+                        Cust_Rec.Name := Rec.Name;
+                        Cust_Rec.Insert();
+                        CurrPage.Close();
+                        Page.Run(Page::"Customer Card", Cust_Rec);
+
+                    end;
 
                 end;
             }
         }
     }
+
+    var
+        ErrorFact: Codeunit "Error Factbox";
 
 }
