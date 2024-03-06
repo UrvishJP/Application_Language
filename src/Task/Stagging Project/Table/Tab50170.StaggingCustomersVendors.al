@@ -109,10 +109,5 @@ table 50170 "Stagging Customers/Vendors"
         }
     }
 
-    var
-        // EmpID: Text[30];
-        regex: Codeunit Regex;
-        Pattern: Text;
-        email: Text[70];
 
 }

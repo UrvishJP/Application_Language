@@ -7,7 +7,7 @@ codeunit 50170 "Error Factbox"
         ErrorMsg: Record "Error Message";
 
     begin
-
+        // DeleteLines(Rec);
         ErrorMsg.SetContext(Rec);
 
         if (Rec.Name = '') then
@@ -31,16 +31,16 @@ codeunit 50170 "Error Factbox"
 
     end;
 
-    procedure DeleteLines(Rec: Record "Stagging Customers/Vendors")
+    // procedure DeleteLines(Rec: Record "Stagging Customers/Vendors")
 
-    var
-        ErrorMsg: Record "Error Message";
+    // var
+    //     ErrorMsg: Record "Error Message";
 
-    begin
+    // begin
 
-        ErrorMsg.ClearLog();
-        // ErrorMsg.SetContext(Rec);
-    end;
+    //     ErrorMsg.ClearLog();
+    //     ErrorMsg.SetContext(Rec);
+    // end;
 
 
 

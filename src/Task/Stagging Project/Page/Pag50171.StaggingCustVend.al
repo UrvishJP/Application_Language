@@ -188,7 +188,7 @@ page 50171 "Stagging - Cust/Vend"
                 trigger OnAction()
 
                 begin
-                    ErrorFact.DeleteLines(Rec);
+                    // ErrorFact.DeleteLines(Rec);
                     ErrorFact.ValidateFields(Rec);
 
                 end;
@@ -221,6 +221,10 @@ page 50171 "Stagging - Cust/Vend"
                         Cust_Rec.Init();
                         Cust_Rec."No." := Rec."No.";
                         Cust_Rec.Name := Rec.Name;
+                        Cust_Rec.Address := Rec.Address;
+                        Cust_Rec."Address 2" := Rec."Address 2";
+                        Cust_Rec."Phone No." := Rec."Phone No.";
+                        Cust_Rec."E-Mail" := Rec."E-mail";
                         Cust_Rec.Insert();
                         CurrPage.Close();
                         Page.Run(Page::"Customer Card", Cust_Rec);
@@ -239,7 +243,7 @@ page 50171 "Stagging - Cust/Vend"
 
                 trigger OnAction()
                 var
-                    Cust_Rec: Record Customer;
+                    Vend_Rec: Record Vendor;
                     Answer: Boolean;
 
                 begin
@@ -249,13 +253,17 @@ page 50171 "Stagging - Cust/Vend"
                     Answer := Dialog.Confirm('Do you want to create a new Vendor for this record?');
 
                     if (Answer = true) then begin
-                        Clear(Cust_Rec);
-                        Cust_Rec.Init();
-                        Cust_Rec."No." := Rec."No.";
-                        Cust_Rec.Name := Rec.Name;
-                        Cust_Rec.Insert();
+                        Clear(Vend_Rec);
+                        Vend_Rec.Init();
+                        Vend_Rec."No." := Rec."No.";
+                        Vend_Rec.Name := Rec.Name;
+                        Vend_Rec.Address := Rec.Address;
+                        Vend_Rec."Address 2" := Rec."Address 2";
+                        Vend_Rec."Phone No." := Rec."Phone No.";
+                        Vend_Rec."E-Mail" := Rec."E-mail";
+                        Vend_Rec.Insert();
                         CurrPage.Close();
-                        Page.Run(Page::"Customer Card", Cust_Rec);
+                        Page.Run(Page::"Vendor Card", Vend_Rec);
 
                     end;
 
@@ -266,5 +274,6 @@ page 50171 "Stagging - Cust/Vend"
 
     var
         ErrorFact: Codeunit "Error Factbox";
+        ErrorMsg: Record "Error Message";
 
 }
