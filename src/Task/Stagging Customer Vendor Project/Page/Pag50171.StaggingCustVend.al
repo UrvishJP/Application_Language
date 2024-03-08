@@ -169,9 +169,10 @@ page 50171 "Stagging - Cust/Vend"
                 begin
                     ErrorMsg.DeleteAll();
                     ErrorFact.ValidateFields(Rec);
+
+                    if (NOT ErrorFact.ValidateFields(Rec)) then
+                        Message('Data Successfully Validated.');
                 end;
-
-
             }
 
             action("Create Customer")
