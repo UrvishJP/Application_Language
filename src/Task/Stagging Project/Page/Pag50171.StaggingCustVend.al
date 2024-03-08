@@ -119,7 +119,6 @@ page 50171 "Stagging - Cust/Vend"
                     }
                 }
 
-
             }
 
         }
@@ -181,36 +180,35 @@ page 50171 "Stagging - Cust/Vend"
                 Image = PersonInCharge;
                 Visible = Rec.Type = Rec.Type::Customer;
                 Enabled = Rec.Status = Rec.Status::Registered;
-           
+
                 trigger OnAction()
                 var
                     Cust_Rec: Record Customer;
-                    Answer: Boolean;
 
                 begin
 
-                    ErrorFact.ValidateFields(Rec);
+                    ErrorMsg.DeleteAll();
 
-                    Answer := Dialog.Confirm('Do you want to create a new Customer for this record?');
+                    if (NOT ErrorFact.ValidateFields(Rec)) then begin
 
-                    if (Answer = true) then begin
-                        Clear(Cust_Rec);
-                        Cust_Rec.Init();
-                        Cust_Rec."No." := Rec."No.";
-                        Cust_Rec.Name := Rec.Name;
-                        Cust_Rec.Address := Rec.Address;
-                        Cust_Rec."Address 2" := Rec."Address 2";
-                        Cust_Rec."Phone No." := Rec."Phone No.";
-                        Cust_Rec."E-Mail" := Rec."E-mail";
-                        Cust_Rec.Insert();
-                        CurrPage.Close();
-                        Page.Run(Page::"Customer Card", Cust_Rec);
+                        if Confirm('Do you want to create a new Customer for this record?') then begin
 
+                            Clear(Cust_Rec);
+                            Cust_Rec."No." := Rec."No.";
+                            Cust_Rec.Name := Rec.Name;
+                            Cust_Rec.Address := Rec.Address;
+                            Cust_Rec."Address 2" := Rec."Address 2";
+                            Cust_Rec."Phone No." := Rec."Phone No.";
+                            Cust_Rec."E-Mail" := Rec."E-mail";
+                            Cust_Rec.Insert();
+                            CurrPage.Close();
+                            Page.Run(Page::"Customer Card", Cust_Rec);
+
+                        end;
                     end;
-
                 end;
-
             }
+
             action("Create Vendor")
             {
                 ApplicationArea = All;
@@ -221,30 +219,30 @@ page 50171 "Stagging - Cust/Vend"
                 trigger OnAction()
                 var
                     Vend_Rec: Record Vendor;
-                    Answer: Boolean;
 
                 begin
 
-                    ErrorFact.ValidateFields(Rec);
+                    ErrorMsg.DeleteAll();
 
-                    Answer := Dialog.Confirm('Do you want to create a new Vendor for this record?');
+                    if (NOT ErrorFact.ValidateFields(Rec)) then begin
 
-                    if (Answer = true) then begin
-                        Clear(Vend_Rec);
-                        Vend_Rec.Init();
-                        Vend_Rec."No." := Rec."No.";
-                        Vend_Rec.Name := Rec.Name;
-                        Vend_Rec.Address := Rec.Address;
-                        Vend_Rec."Address 2" := Rec."Address 2";
-                        Vend_Rec."Phone No." := Rec."Phone No.";
-                        Vend_Rec."E-Mail" := Rec."E-mail";
-                        Vend_Rec.Insert();
-                        CurrPage.Close();
-                        Page.Run(Page::"Vendor Card", Vend_Rec);
+                        if Confirm('Do you want to create a new Vendor for this record?') then begin
 
+                            Clear(Vend_Rec);
+                            Vend_Rec."No." := Rec."No.";
+                            Vend_Rec.Name := Rec.Name;
+                            Vend_Rec.Address := Rec.Address;
+                            Vend_Rec."Address 2" := Rec."Address 2";
+                            Vend_Rec."Phone No." := Rec."Phone No.";
+                            Vend_Rec."E-Mail" := Rec."E-mail";
+                            Vend_Rec.Insert();
+                            CurrPage.Close();
+                            Page.Run(Page::"Vendor Card", Vend_Rec);
+
+                        end;
                     end;
-
                 end;
+
             }
         }
     }
