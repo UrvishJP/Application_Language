@@ -28,4 +28,10 @@ page 50172 "Error Factbox"
         }
     }
 
+    trigger OnOpenPage()
+
+    begin
+        Rec.DeleteAll();
+    end;
+
 }

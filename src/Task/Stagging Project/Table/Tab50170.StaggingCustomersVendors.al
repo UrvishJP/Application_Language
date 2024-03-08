@@ -44,7 +44,6 @@ table 50170 "Stagging Customers/Vendors"
         field(8; "E-mail"; Text[50])
         {
             Caption = 'E-mail';
-
         }
         field(9; "Business Type"; Enum "Business Type")
         {

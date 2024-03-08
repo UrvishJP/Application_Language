@@ -1,13 +1,9 @@
 codeunit 50170 "Error Factbox"
 {
-
-    procedure ValidateFields(Rec: Record "Stagging Customers/Vendors")
-
-    var
-        ErrorMsg: Record "Error Message";
+    procedure ValidateFields(Rec: Record "Stagging Customers/Vendors")  
 
     begin
-        // DeleteLines(Rec);
+        
         ErrorMsg.SetContext(Rec);
 
         if (Rec.Name = '') then
@@ -28,20 +24,14 @@ codeunit 50170 "Error Factbox"
         if (Rec."No." = '') then
             ErrorMsg.LogIfEmpty(Rec, Rec.FieldNo("No."), 0);
 
+        if (NOT MailMng.CheckValidEmailAddress(Rec."E-mail")) then
+            ErrorMsg.LogMessage(Rec, Rec.FieldNo("E-mail"), 0, 'Email must contain ''@''.');
 
     end;
 
-    // procedure DeleteLines(Rec: Record "Stagging Customers/Vendors")
 
-    // var
-    //     ErrorMsg: Record "Error Message";
-
-    // begin
-
-    //     ErrorMsg.ClearLog();
-    //     ErrorMsg.SetContext(Rec);
-    // end;
-
-
-
+    var
+        MailMng: Codeunit "Mail Management";
+        ErrorMsg: Record "Error Message";
+        Msg: Boolean;
 }

@@ -6,8 +6,6 @@ page 50171 "Stagging - Cust/Vend"
     SourceTable = "Stagging Customers/Vendors";
     UsageCategory = Lists;
     DataCaptionFields = Type, ABN;
-    // DelayedInsert = true;
-
 
     layout
     {
@@ -17,7 +15,6 @@ page 50171 "Stagging - Cust/Vend"
             field(Type; Rec.Type)
             {
                 ToolTip = 'Specifies the value of the Type field.';
-
 
             }
             field(ABN; Rec.ABN)
@@ -61,20 +58,6 @@ page 50171 "Stagging - Cust/Vend"
                 field("E-mail"; Rec."E-mail")
                 {
                     ToolTip = 'Specifies the value of the E-mail field.';
-
-                    trigger OnValidate()
-
-                    begin
-                        // if (StrLen(Rec."E-mail") > 6) and
-                        //     (Strpos(Rec."E-mail", '.') > Strpos(Rec."E-mail", '@')) and
-                        //     (Strpos(Rec."E-mail", '@') > 1) and
-                        //     (Strpos(Rec."E-mail", '.') < (Strlen(Rec."E-mail") - 2)) then
-                        //     Message('Perfect');
-
-                        // else
-                        //     Error('Invalid E-mail.');
-                    end;
-
 
                 }
                 field("Business Type"; Rec."Business Type")
@@ -144,9 +127,6 @@ page 50171 "Stagging - Cust/Vend"
         {
             part("Error Factbox"; "Error Factbox")
             {
-                // SubPageLink = 
-                // Provider = "Error Factbox";
-                // SubPageLink = SystemId = field(SystemId);
                 ApplicationArea = all;
             }
         }
@@ -167,10 +147,10 @@ page 50171 "Stagging - Cust/Vend"
             {
 
 
-
             }
             actionref(MyPromotedActionRef3; "Create Vendor")
             {
+
             }
 
 
@@ -188,9 +168,8 @@ page 50171 "Stagging - Cust/Vend"
                 trigger OnAction()
 
                 begin
-                    // ErrorFact.DeleteLines(Rec);
+                    ErrorMsg.DeleteAll();
                     ErrorFact.ValidateFields(Rec);
-
                 end;
 
 
@@ -202,9 +181,7 @@ page 50171 "Stagging - Cust/Vend"
                 Image = PersonInCharge;
                 Visible = Rec.Type = Rec.Type::Customer;
                 Enabled = Rec.Status = Rec.Status::Registered;
-                // RunPageOnRec = true;
-                // RunObject = Page "Customer Card";
-                // RunPageLink = Name = field(Name);
+           
                 trigger OnAction()
                 var
                     Cust_Rec: Record Customer;
