@@ -11,6 +11,17 @@ tableextension 50180 "Sales Line Ext" extends "Sales Line"
         {
             Caption = 'Order Converted';
             DataClassification = ToBeClassified;
+            Editable = false;
         }
     }
+
+    trigger OnAfterModify()
+    var
+        myInt: Integer;
+    begin
+        if "Document Type" = "Document Type"::Quote then
+            if ("Order Converted" = true) then begin
+                Error('Can not be modified');
+            end;
+    end;
 }
