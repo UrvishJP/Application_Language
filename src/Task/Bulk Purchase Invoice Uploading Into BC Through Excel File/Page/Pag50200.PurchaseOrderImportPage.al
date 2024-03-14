@@ -10,11 +10,24 @@ page 50200 "Purchase Order Import Page"
     {
         area(content)
         {
-
-            field("Batch Name"; Rec."Batch Name")
+            field("Batch Name"; BName)
             {
                 ApplicationArea = all;
 
+                trigger OnLookup(var Text: Text): Boolean
+
+                begin
+                    if Page.RunModal(Page::"Purchase Order Import Batches", Batches) = Action::LookupOK then begin
+                        BName := Batches.Name;
+                        ChangeBatch();
+                    end;
+                end;
+
+                trigger OnValidate()
+
+                begin
+                    ChangeBatch();
+                end;
             }
 
             repeater(General)
@@ -134,9 +147,19 @@ page 50200 "Purchase Order Import Page"
 
                 trigger OnAction()
 
+                var
+                    ImpBatchs: Record "Purchase Order Import Batches";
+
                 begin
-                    ImportExportData.ReadData();
-                    ImportExportData.ImpFromExcel();
+                    if (Rec."Batch Name" <> '') then begin
+                        ImpBatchs.Get(BName);
+                        ImpBatchs.TestField("Reading CodeUnit");
+                        Codeunit.Run(ImpBatchs."Reading CodeUnit", ImpBatchs);
+                        Rec.Reset();
+                        Rec.SetRange("Batch Name", BName);
+                    end
+                    else
+                        Message('Please select Batch Name first.');
                 end;
             }
             action("Validate Data")
@@ -176,9 +199,9 @@ page 50200 "Purchase Order Import Page"
 
                         PurchaseOrder."Buy-from Address" := Rec."Imported Ship-to Address";
                         PurchaseOrder."Buy-from Address 2" := Rec."Imported Ship-to Address 2";
-                        PurchaseOrder.Insert();
                         PurchaseOrder.Modify();
 
+                        Message('Purchase Order Successfully Created.');
                     end;
                 end;
             }
@@ -196,13 +219,42 @@ page 50200 "Purchase Order Import Page"
                     ImportExportData.ExportToExcel(Rec);
                 end;
             }
+            action("Delete Record")
+            {
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = Delete;
+                trigger OnAction()
+                var
+
+                begin
+                    if Confirm('Do you want to delete all Records?') then
+                        if Rec.FindSet() then
+                            Rec.DeleteAll();
+                end;
+
+            }
 
         }
     }
+
+    procedure ChangeBatch()
+
+    begin
+
+        Batches.Get(BName);
+        CurrPage.SaveRecord();
+        Rec.SetRange("Batch Name", BName);
+        CurrPage.Update(false);
+    end;
+
 
     var
         ImportExportData: Codeunit "Import Export Data";
         ErrorAndWarnings: Codeunit "Error and Warning CodeUnit";
         ErrorMsg: Record "Error Message";
+        Batches: Record "Purchase Order Import Batches";
+        BName: Text[50];
 
 }

@@ -9,6 +9,30 @@ codeunit 50210 "Error and Warning CodeUnit"
         if (Rec."Imported Vendor No." = '') then
             ErrorMsg.LogIfEmpty(Rec, Rec.FieldNo("Imported Vendor No."), 0);
 
+        if (Rec."Imported Item No." = '') then
+            ErrorMsg.LogIfEmpty(Rec, Rec.FieldNo("Imported Item No."), 0);
+
+        if (Rec."Imported Location Code" = '') then
+            ErrorMsg.LogIfEmpty(Rec, Rec.FieldNo("Imported Location Code"), 0);
+
+        if (Rec."Imported Ship-to Country Code" = '') then
+            ErrorMsg.LogIfEmpty(Rec, Rec.FieldNo("Imported Ship-to Country Code"), 0);
+
+        if (Rec."Imported Item Quantity" = 0) then
+            ErrorMsg.LogIfEmpty(Rec, Rec.FieldNo("Imported Item Quantity"), 0);
+
+        if (Rec."Imported Item Unit Price" = 0) then
+            ErrorMsg.LogIfEmpty(Rec, Rec.FieldNo("Imported Item Unit Price"), 0);
+
+        if (Rec."Vendor No." = '') then
+            ErrorMsg.LogIfEmpty(Rec, Rec.FieldNo("Vendor No."), 0);
+
+        if (Rec."Posting Date" = 0D) then
+            ErrorMsg.LogIfEmpty(Rec, Rec.FieldNo("Posting Date"), 0);
+
+        if (Rec."Order Date" = 0D) then
+            ErrorMsg.LogIfEmpty(Rec, Rec.FieldNo("Order Date"), 0);
+
         if ErrorMsg.HasErrors(false) then
             exit(true);
 

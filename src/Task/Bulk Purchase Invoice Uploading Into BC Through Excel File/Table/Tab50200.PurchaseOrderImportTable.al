@@ -104,13 +104,18 @@ table 50200 "Purchase Order Import Table"
                     "Batch Name" := ImpBatch.Name;
             end;
         }
+        field(26; "Line No"; Integer)
+        {
+            DataClassification = ToBeClassified;
+            AutoIncrement = true;
+        }
     }
     keys
     {
-        key(PK; "Imported Vendor No.")
+        key(PK;"Line No", "Batch Name")
         {
             Clustered = true;
         }
     }
-    
+
 }

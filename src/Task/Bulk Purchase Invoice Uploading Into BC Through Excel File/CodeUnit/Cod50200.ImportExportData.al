@@ -13,6 +13,8 @@ codeunit 50200 "Import Export Data"
         TempExcelBuffer.DeleteAll();
         TempExcelBuffer.NewRow();
 
+
+        TempExcelBuffer.AddColumn(expToExcel.FieldCaption("Batch Name"), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
         TempExcelBuffer.AddColumn(expToExcel.FieldCaption("Imported Vendor No."), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
         TempExcelBuffer.AddColumn(expToExcel.FieldCaption("Imported Item No."), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
         TempExcelBuffer.AddColumn(expToExcel.FieldCaption("Imported Location Code"), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
@@ -40,6 +42,7 @@ codeunit 50200 "Import Export Data"
         if ExpToExcel.FindSet() then
             repeat
                 TempExcelBuffer.NewRow();
+                TempExcelBuffer.AddColumn(expToExcel."Batch Name", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
                 TempExcelBuffer.AddColumn(expToExcel."Imported Vendor No.", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
                 TempExcelBuffer.AddColumn(expToExcel."Imported Item No.", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
                 TempExcelBuffer.AddColumn(expToExcel."Imported Location Code", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
@@ -74,6 +77,14 @@ codeunit 50200 "Import Export Data"
     end;
 
     //Import data to BC from Excel
+
+    trigger OnRun()
+
+    begin
+        ReadData();
+        ImpFromExcel();
+    end;
+
     procedure ReadData()
 
     var
@@ -116,7 +127,9 @@ codeunit 50200 "Import Export Data"
         LineNo: Integer;
         MaxRow: Integer;
 
+
     begin
+
         RowNo := 0;
         ColNo := 0;
         LineNo := 0;
@@ -130,10 +143,12 @@ codeunit 50200 "Import Export Data"
 
         for RowNo := 2 to MaxRow do begin
             ImpToPurchaseOrder.Init();
-            ImpToPurchaseOrder."Imported Vendor No." := GetValueAtCell(RowNo, 1);
-            ImpToPurchaseOrder."Imported Item No." := GetValueAtCell(RowNo, 2);
-            ImpToPurchaseOrder."Imported Ship-to Address" := GetValueAtCell(RowNo, 10);
-            ImpToPurchaseOrder."Imported Ship-to Address 2" := GetValueAtCell(RowNo, 11);
+            ImpToPurchaseOrder."Line No" := LineNo;
+            ImpToPurchaseOrder."Batch Name" := GetValueAtCell(RowNo, 1);
+            ImpToPurchaseOrder."Imported Vendor No." := GetValueAtCell(RowNo, 2);
+            ImpToPurchaseOrder."Imported Item No." := GetValueAtCell(RowNo, 3);
+            ImpToPurchaseOrder."Imported Ship-to Address" := GetValueAtCell(RowNo, 11);
+            ImpToPurchaseOrder."Imported Ship-to Address 2" := GetValueAtCell(RowNo, 12);
             ImpToPurchaseOrder.Insert();
             ImpToPurchaseOrder.Modify();
         end;
@@ -150,6 +165,5 @@ codeunit 50200 "Import Export Data"
         UploadMsg: Label 'Choose the file for importing into Business Central.';
         NoFileMsg: Label 'No Excel file found.';
         ExcelImpSuccess: Label 'Data successfully imported from Excel.';
-
 
 }

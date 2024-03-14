@@ -28,7 +28,7 @@ table 50201 "Purchase Order Import Batches"
     }
     keys
     {
-        key(PK; "Reading CodeUnit")
+        key(PK; Name)
         {
             Clustered = true;
         }
