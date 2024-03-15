@@ -1,10 +1,11 @@
-page 50200 "Purchase Order Import Page"
+page 50201 "Purchase Order Import Page"
 {
     ApplicationArea = All;
     Caption = 'Purchase Order Import Page';
     PageType = Worksheet;
     SourceTable = "Purchase Order Import Table";
     UsageCategory = Documents;
+    InsertAllowed = false;
 
     layout
     {
@@ -13,8 +14,6 @@ page 50200 "Purchase Order Import Page"
             field("Batch Name"; BName)
             {
                 ApplicationArea = all;
-
-
 
                 trigger OnLookup(var Text: Text): Boolean
 
@@ -205,8 +204,6 @@ page 50200 "Purchase Order Import Page"
                     end;
 
                     if ErrorMsg.IsEmpty() then begin
-                        // ErrorMsg.DeleteAll();
-                        // CurrPage."Error and Warnings".Page.Update(false);
                         Message('Data Successfully Validated.');
                     end;
                 end;
@@ -226,14 +223,9 @@ page 50200 "Purchase Order Import Page"
 
                 begin
 
-                    if (Rec."Imported Vendor No." = PurchaseOrder."Buy-from Vendor No.") then begin
+                    Message('work in progress');
+                    CreatePurchase.CreatePurchaseOrder(Rec);
 
-                        PurchaseOrder."Buy-from Address" := Rec."Imported Ship-to Address";
-                        PurchaseOrder."Buy-from Address 2" := Rec."Imported Ship-to Address 2";
-                        PurchaseOrder.Modify();
-
-                        Message('Purchase Order Successfully Created.');
-                    end;
                 end;
             }
             action("Export Layout")
@@ -274,14 +266,19 @@ page 50200 "Purchase Order Import Page"
 
     begin
         Batches.Get(BName);
+
         CurrPage.SaveRecord();
+        Rec.Reset();
         Rec.SetRange("Batch Name", BName);
+
         CurrPage.Update(false);
     end;
 
     trigger OnAfterGetRecord()
 
     begin
+
+
         if ErrorAndWarnings.ChangeStyle(Rec) then begin
             StyleExpresion := 'Unfavorable';
         end
@@ -304,6 +301,8 @@ page 50200 "Purchase Order Import Page"
         Batches: Record "Purchase Order Import Batches";
         BName: Text[50];
         StyleExpresion: Text[50];
+
+        CreatePurchase: Codeunit "Processing CodeUnit";
 
 
 }

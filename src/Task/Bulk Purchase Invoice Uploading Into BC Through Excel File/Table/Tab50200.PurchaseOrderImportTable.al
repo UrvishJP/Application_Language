@@ -2,7 +2,7 @@ table 50200 "Purchase Order Import Table"
 {
     Caption = 'Purchase Order Import Table';
     DataClassification = ToBeClassified;
-
+    
 
     fields
     {
@@ -113,7 +113,7 @@ table 50200 "Purchase Order Import Table"
     }
     keys
     {
-        key(PK;"Line No", "Batch Name")
+        key(PK;"Batch Name","Line No")
         {
             Clustered = true;
         }

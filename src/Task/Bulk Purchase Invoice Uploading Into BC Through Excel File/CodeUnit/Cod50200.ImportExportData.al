@@ -135,20 +135,40 @@ codeunit 50200 "Import Export Data"
         LineNo := 0;
         MaxRow := 0;
 
+        TempExcelBuffer.Reset();
         ImpToPurchaseOrder.Reset();
 
-        if ImpToPurchaseOrder.FindLast() then
+        if TempExcelBuffer.FindLast() then
             MaxRow := TempExcelBuffer."Row No.";
 
-
         for RowNo := 2 to MaxRow do begin
+
             ImpToPurchaseOrder.Init();
             ImpToPurchaseOrder."Line No" := LineNo;
             ImpToPurchaseOrder."Batch Name" := GetValueAtCell(RowNo, 1);
             ImpToPurchaseOrder."Imported Vendor No." := GetValueAtCell(RowNo, 2);
             ImpToPurchaseOrder."Imported Item No." := GetValueAtCell(RowNo, 3);
-            ImpToPurchaseOrder."Imported Ship-to Address" := GetValueAtCell(RowNo, 11);
-            ImpToPurchaseOrder."Imported Ship-to Address 2" := GetValueAtCell(RowNo, 12);
+            ImpToPurchaseOrder."Imported Location Code" := GetValueAtcell(RowNo, 4);
+            ImpToPurchaseOrder."Imported Ship-to Country Code" := GetValueAtcell(RowNo, 5);
+            ImpToPurchaseOrder."Imported Shipping Agent Code" := GetValueAtcell(RowNo, 6);
+            ImpToPurchaseOrder.ImportedShippingAgentService := GetValueAtcell(RowNo, 7);
+            ImpToPurchaseOrder."Imported External Document No." := GetValueAtcell(RowNo, 8);
+            Evaluate(ImpToPurchaseOrder."Imported Shipment Date", GetValueAtcell(RowNo, 9));
+            ImpToPurchaseOrder."Imported Ship-to Name" := GetValueAtcell(RowNo, 10);
+            ImpToPurchaseOrder."Imported Ship-to Address" := GetValueAtcell(RowNo, 11);
+            ImpToPurchaseOrder."Imported Ship-to Address 2" := GetValueAtcell(RowNo, 12);
+            ImpToPurchaseOrder."Imported Ship-to City" := GetValueAtcell(RowNo, 13);
+            ImpToPurchaseOrder."Imported Ship-to State" := GetValueAtcell(RowNo, 14);
+            ImpToPurchaseOrder."Imported Ship-to Post Code" := GetValueAtcell(RowNo, 15);
+            Evaluate(ImpToPurchaseOrder."Imported Item Quantity", GetValueAtcell(RowNo, 16));
+            Evaluate(ImpToPurchaseOrder."Imported Item Unit Price", GetValueAtcell(RowNo, 17));
+            Evaluate(ImpToPurchaseOrder."Imported Line Discount Amount", GetValueAtcell(RowNo, 18));
+            ImpToPurchaseOrder."Vendor No." := GetValueAtcell(RowNo, 19);
+            Evaluate(ImpToPurchaseOrder."Posting Date", GetValueAtcell(RowNo, 20));
+            Evaluate(ImpToPurchaseOrder."Order Date", GetValueAtcell(RowNo, 21));
+            Evaluate(ImpToPurchaseOrder."Shipping Agent Code", GetValueAtcell(RowNo, 22));
+            Evaluate(ImpToPurchaseOrder."Shipping Agent Service", GetValueAtcell(RowNo, 23));
+
             ImpToPurchaseOrder.Insert();
             ImpToPurchaseOrder.Modify();
         end;

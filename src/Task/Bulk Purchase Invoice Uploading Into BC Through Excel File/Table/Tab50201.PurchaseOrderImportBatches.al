@@ -33,4 +33,14 @@ table 50201 "Purchase Order Import Batches"
             Clustered = true;
         }
     }
+
+    trigger OnDelete()
+
+    var
+        ImpPurchaseTable: Record "Purchase Order Import Table";
+
+    begin
+        ImpPurchaseTable.SetRange("Batch Name", Name);
+        ImpPurchaseTable.DeleteAll();
+    end;
 }
