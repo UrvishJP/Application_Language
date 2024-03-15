@@ -14,6 +14,8 @@ page 50200 "Purchase Order Import Page"
             {
                 ApplicationArea = all;
 
+
+
                 trigger OnLookup(var Text: Text): Boolean
 
                 begin
@@ -35,90 +37,112 @@ page 50200 "Purchase Order Import Page"
                 field("Imported Vendor No."; Rec."Imported Vendor No.")
                 {
                     ToolTip = 'Specifies the value of the Imported Vendor No. field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Imported Item No."; Rec."Imported Item No.")
                 {
                     ToolTip = 'Specifies the value of the Imported Item No. field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Imported Location Code"; Rec."Imported Location Code")
                 {
                     ToolTip = 'Specifies the value of the Imported Location Code field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Imported Ship-to Country Code"; Rec."Imported Ship-to Country Code")
                 {
                     ToolTip = 'Specifies the value of the Imported Ship-to Country Code field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Imported Shipping Agent Code"; Rec."Imported Shipping Agent Code")
                 {
                     ToolTip = 'Specifies the value of the Imported Shipping Agent Code field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field(ImportedShippingAgentService; Rec.ImportedShippingAgentService)
                 {
                     ToolTip = 'Specifies the value of the Imported Shipping Agent Service field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Imported External Document No."; Rec."Imported External Document No.")
                 {
                     ToolTip = 'Specifies the value of the Imported External Document No. field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Imported Shipment Date"; Rec."Imported Shipment Date")
                 {
                     ToolTip = 'Specifies the value of the Imported Shipment Date field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Imported Ship-to Name"; Rec."Imported Ship-to Name")
                 {
                     ToolTip = 'Specifies the value of the Imported Ship-to Name field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Imported Ship-to Address"; Rec."Imported Ship-to Address")
                 {
                     ToolTip = 'Specifies the value of the Imported Ship-to Address field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Imported Ship-to Address 2"; Rec."Imported Ship-to Address 2")
                 {
                     ToolTip = 'Specifies the value of the Imported Ship-to Address 2 field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Imported Ship-to City"; Rec."Imported Ship-to City")
                 {
                     ToolTip = 'Specifies the value of the Imported Ship-to City field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Imported Ship-to State"; Rec."Imported Ship-to State")
                 {
                     ToolTip = 'Specifies the value of the Imported Ship-to State field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Imported Ship-to Post Code"; Rec."Imported Ship-to Post Code")
                 {
                     ToolTip = 'Specifies the value of the Imported Ship-to Post Code field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Imported Item Quantity"; Rec."Imported Item Quantity")
                 {
                     ToolTip = 'Specifies the value of the Imported Item Quantity field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Imported Item Unit Price"; Rec."Imported Item Unit Price")
                 {
                     ToolTip = 'Specifies the value of the Imported Item Unit Price field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Imported Line Discount Amount"; Rec."Imported Line Discount Amount")
                 {
                     ToolTip = 'Specifies the value of the Imported Line Discount Amount field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Vendor No."; Rec."Vendor No.")
                 {
                     ToolTip = 'Specifies the value of the Vendor No. field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Posting Date"; Rec."Posting Date")
                 {
                     ToolTip = 'Specifies the value of the Posting Date field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Order Date"; Rec."Order Date")
                 {
                     ToolTip = 'Specifies the value of the Order Date field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Shipping Agent Code"; Rec."Shipping Agent Code")
                 {
                     ToolTip = 'Specifies the value of the Shipping Agent Code field.';
+                    StyleExpr = StyleExpresion;
                 }
                 field("Shipping Agent Service"; Rec."Shipping Agent Service")
                 {
                     ToolTip = 'Specifies the value of the Shipping Agent Service field.';
+                    StyleExpr = StyleExpresion;
                 }
             }
 
@@ -134,7 +158,6 @@ page 50200 "Purchase Order Import Page"
     }
     actions
     {
-
         area(Processing)
         {
             action("Import Purchase Order")
@@ -174,10 +197,18 @@ page 50200 "Purchase Order Import Page"
 
                 begin
                     ErrorMsg.DeleteAll();
-                    ErrorAndWarnings.ValidateFields(Rec);
+                    Rec.SetRange("Batch Name", BName);
+                    if Rec.FindSet() then begin
+                        repeat
+                            ErrorAndWarnings.ValidateFields(Rec);
+                        until Rec.Next() = 0;
+                    end;
 
-                    if (NOT ErrorAndWarnings.ValidateFields(Rec)) then
+                    if ErrorMsg.IsEmpty() then begin
+                        // ErrorMsg.DeleteAll();
+                        // CurrPage."Error and Warnings".Page.Update(false);
                         Message('Data Successfully Validated.');
+                    end;
                 end;
             }
             action("Create Purchase Order")
@@ -242,11 +273,27 @@ page 50200 "Purchase Order Import Page"
     procedure ChangeBatch()
 
     begin
-
         Batches.Get(BName);
         CurrPage.SaveRecord();
         Rec.SetRange("Batch Name", BName);
         CurrPage.Update(false);
+    end;
+
+    trigger OnAfterGetRecord()
+
+    begin
+        if ErrorAndWarnings.ChangeStyle(Rec) then begin
+            StyleExpresion := 'Unfavorable';
+        end
+        else
+            StyleExpresion := 'Standard';
+    end;
+
+    trigger OnOpenPage()
+
+    begin
+        BName := 'Default';
+        Rec.SetFilter("Batch Name", BName);
     end;
 
 
@@ -256,5 +303,7 @@ page 50200 "Purchase Order Import Page"
         ErrorMsg: Record "Error Message";
         Batches: Record "Purchase Order Import Batches";
         BName: Text[50];
+        StyleExpresion: Text[50];
+
 
 }

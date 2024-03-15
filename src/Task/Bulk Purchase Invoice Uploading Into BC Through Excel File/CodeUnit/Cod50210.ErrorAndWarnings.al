@@ -38,6 +38,13 @@ codeunit 50210 "Error and Warning CodeUnit"
 
     end;
 
+    procedure ChangeStyle(Rec: Record "Purchase Order Import Table"): Boolean
+
+    begin
+        ErrorMsg.SetContext(Rec);
+        exit(ErrorMsg.HasErrors(false));
+    end;
+
 
     var
         ErrorMsg: Record "Error Message";
