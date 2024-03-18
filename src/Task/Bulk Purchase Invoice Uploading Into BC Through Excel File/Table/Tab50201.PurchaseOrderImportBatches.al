@@ -43,4 +43,12 @@ table 50201 "Purchase Order Import Batches"
         ImpPurchaseTable.SetRange("Batch Name", Name);
         ImpPurchaseTable.DeleteAll();
     end;
+
+    trigger OnInsert()
+
+    begin
+        "Reading CodeUnit" := Codeunit::"Import Export Data";
+        "Processing CodeUnit" := Codeunit::"Processing CodeUnit";
+        "Validation CodeUnit" := Codeunit::"Error and Warning CodeUnit";
+    end;
 }

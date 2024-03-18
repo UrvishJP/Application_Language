@@ -169,9 +169,6 @@ page 50201 "Purchase Order Import Page"
 
                 trigger OnAction()
 
-                var
-                    ImpBatchs: Record "Purchase Order Import Batches";
-
                 begin
                     if (Rec."Batch Name" <> '') then begin
                         ImpBatchs.Get(BName);
@@ -195,17 +192,13 @@ page 50201 "Purchase Order Import Page"
                 trigger OnAction()
 
                 begin
-                    ErrorMsg.DeleteAll();
-                    Rec.SetRange("Batch Name", BName);
-                    if Rec.FindSet() then begin
-                        repeat
-                            ErrorAndWarnings.ValidateFields(Rec);
-                        until Rec.Next() = 0;
-                    end;
 
+                    ValidateData();
                     if ErrorMsg.IsEmpty() then begin
-                        Message('Data Successfully Validated.');
-                    end;
+                        Message('Data Successfully Validated......No error found.');
+                    end
+                    else
+                        Message('Error found in data.');
                 end;
             }
             action("Create Purchase Order")
@@ -218,14 +211,11 @@ page 50201 "Purchase Order Import Page"
 
                 trigger OnAction()
 
-                var
-                    PurchaseOrder: Record "Purchase Header";
-
                 begin
-
-                    Message('work in progress');
-                    CreatePurchase.CreatePurchaseOrder(Rec);
-
+                    ValidateData();
+                    ImpBatchs.Get(BName);
+                    ImpBatchs.TestField("Processing CodeUnit");
+                    Codeunit.Run(ImpBatchs."Processing CodeUnit", Rec);
                 end;
             }
             action("Export Layout")
@@ -274,10 +264,23 @@ page 50201 "Purchase Order Import Page"
         CurrPage.Update(false);
     end;
 
+    procedure ValidateData()
+    begin
+        ErrorMsg.DeleteAll();
+        Rec.SetRange("Batch Name", BName);
+        if Rec.FindSet() then begin
+            repeat
+                ImpBatchs.Get(BName);
+                ImpBatchs.TestField("Validation CodeUnit");
+                Codeunit.Run(ImpBatchs."Validation CodeUnit", Rec);
+            until Rec.Next() = 0;
+        end;
+
+    end;
+
     trigger OnAfterGetRecord()
 
     begin
-
 
         if ErrorAndWarnings.ChangeStyle(Rec) then begin
             StyleExpresion := 'Unfavorable';
@@ -299,10 +302,10 @@ page 50201 "Purchase Order Import Page"
         ErrorAndWarnings: Codeunit "Error and Warning CodeUnit";
         ErrorMsg: Record "Error Message";
         Batches: Record "Purchase Order Import Batches";
+        CreatePurchase: Codeunit "Processing CodeUnit";
+        ImpBatchs: Record "Purchase Order Import Batches";
         BName: Text[50];
         StyleExpresion: Text[50];
-
-        CreatePurchase: Codeunit "Processing CodeUnit";
 
 
 }

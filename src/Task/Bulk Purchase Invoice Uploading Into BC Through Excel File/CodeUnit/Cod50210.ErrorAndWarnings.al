@@ -1,5 +1,12 @@
 codeunit 50210 "Error and Warning CodeUnit"
 {
+    TableNo = "Purchase Order Import Table";
+    trigger OnRun()
+
+    begin
+        ValidateFields(Rec);
+    end;
+
     procedure ValidateFields(Rec: Record "Purchase Order Import Table"): Boolean
 
     begin

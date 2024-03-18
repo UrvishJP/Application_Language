@@ -2,18 +2,20 @@ table 50200 "Purchase Order Import Table"
 {
     Caption = 'Purchase Order Import Table';
     DataClassification = ToBeClassified;
-    
+
 
     fields
     {
         field(1; "Imported Vendor No."; Code[30])
         {
             Caption = 'Imported Vendor No.';
-            
+            TableRelation = Vendor;
+
         }
         field(2; "Imported Item No."; Code[30])
         {
             Caption = 'Imported Item No.';
+            TableRelation = Item;
         }
         field(3; "Imported Location Code"; Code[30])
         {
@@ -113,7 +115,7 @@ table 50200 "Purchase Order Import Table"
     }
     keys
     {
-        key(PK;"Batch Name","Line No")
+        key(PK; "Line No", "Batch Name")
         {
             Clustered = true;
         }
