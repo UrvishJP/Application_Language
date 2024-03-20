@@ -10,7 +10,7 @@ codeunit 50230 "CodeUnit Management"
     var
         ImpBatch: Record "Purchase Order Import Batches";
     begin
-        if not ImpBatch.FindFirst() then begin
+        if NOT ImpBatch.FindFirst() then begin
             ImpBatch.Init();
             ImpBatch.Name := 'DEFAULT';
             ImpBatch.Description := 'Default';

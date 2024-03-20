@@ -46,9 +46,8 @@ codeunit 50226 "Processing CodeUnit"
                         PurchHeader_rec."Order Date" := rec."Order Date";
                         PurchHeader_rec.Insert(true);
 
-                        if setup.FindSet() then begin
+                        if setup.FindSet() then 
                             PurchHeader_rec."Purchaser Code" := setup."Override Sales Person";
-                        end;
 
                         PurchLine_rec.Init();
                         PurchLine_rec."Document Type" := PurchLine_rec."Document Type"::Order;
@@ -65,7 +64,7 @@ codeunit 50226 "Processing CodeUnit"
 
                             if setup."Release Order Upon Create" = true then
                                 ReleasePurchDoc.PerformManualRelease(PurchHeader_rec);
-                                
+
                         end;
                     end;
 
@@ -74,9 +73,8 @@ codeunit 50226 "Processing CodeUnit"
 
                 end
 
-                else begin
+                else
                     Message('Purchase Order No. %1 of Item No. %2 not created, please validate the data.', rec."Imported Vendor No.", rec."Imported Item No.");
-                end;
 
             until rec.Next() = 0;
         end;
@@ -94,9 +92,8 @@ codeunit 50226 "Processing CodeUnit"
         purchHeader_rec.SetRange("Buy-from Vendor No.", PurchaseImportOrder_rec."Imported Vendor No.");
 
         if purchHeader_rec.FindFirst() then begin
-            if PurchHeader_rec.Status = PurchHeader_rec.Status::Released then begin
+            if PurchHeader_rec.Status = PurchHeader_rec.Status::Released then
                 ReleasePurchDoc.PerformManualReopen(PurchHeader_rec);
-            end;
 
             lastLine.Reset();
             lastLine.SetRange("Document Type", PurchHeader_rec."Document Type"::Order);

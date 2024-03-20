@@ -195,7 +195,7 @@ page 50201 "Purchase Order Import Page"
 
                     ValidateData();
                     if ErrorMsg.IsEmpty() then begin
-                        Message('Data Successfully Validated......No error found.');
+                        Message('Data Successfully Validated......Now you can create Purchase Order.');
                     end
                     else
                         Message('Error found in data.');
@@ -226,7 +226,6 @@ page 50201 "Purchase Order Import Page"
                 Image = Excel;
                 Promoted = true;
                 PromotedCategory = Process;
-
 
                 trigger OnAction()
 
