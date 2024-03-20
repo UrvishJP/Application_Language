@@ -39,34 +39,34 @@ codeunit 50200 "Import Export Data"
         TempExcelBuffer.AddColumn(expToExcel.FieldCaption("Shipping Agent Service"), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
 
 
-        if ExpToExcel.FindSet() then
-            repeat
-                TempExcelBuffer.NewRow();
-                TempExcelBuffer.AddColumn(expToExcel."Batch Name", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Imported Vendor No.", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Imported Item No.", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Imported Location Code", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Imported Ship-to Country Code", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Imported Shipping Agent Code", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel.ImportedShippingAgentService, false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Imported External Document No.", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Imported Shipment Date", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Date);
-                TempExcelBuffer.AddColumn(expToExcel."Imported Ship-to Name", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Imported Ship-to Address", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Imported Ship-to Address 2", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Imported Ship-to City", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Imported Ship-to State", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Imported Ship-to Post Code", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Imported Item Quantity", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Imported Item Unit Price", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Imported Line Discount Amount", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Vendor No.", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Posting Date", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Date);
-                TempExcelBuffer.AddColumn(expToExcel."Order Date", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Date);
-                TempExcelBuffer.AddColumn(expToExcel."Shipping Agent Code", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                TempExcelBuffer.AddColumn(expToExcel."Shipping Agent Service", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        // if ExpToExcel.FindSet() then
+        //     repeat
+        //         TempExcelBuffer.NewRow();
+        //         TempExcelBuffer.AddColumn(expToExcel."Batch Name", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Imported Vendor No.", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Imported Item No.", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Imported Location Code", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Imported Ship-to Country Code", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Imported Shipping Agent Code", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel.ImportedShippingAgentService, false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Imported External Document No.", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Imported Shipment Date", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Date);
+        //         TempExcelBuffer.AddColumn(expToExcel."Imported Ship-to Name", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Imported Ship-to Address", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Imported Ship-to Address 2", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Imported Ship-to City", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Imported Ship-to State", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Imported Ship-to Post Code", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Imported Item Quantity", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Imported Item Unit Price", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Imported Line Discount Amount", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Vendor No.", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Posting Date", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Date);
+        //         TempExcelBuffer.AddColumn(expToExcel."Order Date", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Date);
+        //         TempExcelBuffer.AddColumn(expToExcel."Shipping Agent Code", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        //         TempExcelBuffer.AddColumn(expToExcel."Shipping Agent Service", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
 
-            until ExpToExcel.Next() = 0;
+        //     until ExpToExcel.Next() = 0;
 
         TempExcelBuffer.CreateNewBook(DataLabel);
         TempExcelBuffer.WriteSheet(DataLabel, 'QQ', UserId);
@@ -146,8 +146,8 @@ codeunit 50200 "Import Export Data"
             ImpToPurchaseOrder.Init();
             ImpToPurchaseOrder."Line No" := LineNo;
             ImpToPurchaseOrder."Batch Name" := GetValueAtCell(RowNo, 1);
-            ImpToPurchaseOrder."Imported Vendor No." := GetValueAtCell(RowNo, 2);
-            ImpToPurchaseOrder."Imported Item No." := GetValueAtCell(RowNo, 3);
+            Evaluate(ImpToPurchaseOrder."Imported Vendor No.", GetValueAtCell(RowNo, 2));
+            Evaluate(ImpToPurchaseOrder."Imported Item No.", GetValueAtCell(RowNo, 3));
             ImpToPurchaseOrder."Imported Location Code" := GetValueAtcell(RowNo, 4);
             ImpToPurchaseOrder."Imported Ship-to Country Code" := GetValueAtcell(RowNo, 5);
             ImpToPurchaseOrder."Imported Shipping Agent Code" := GetValueAtcell(RowNo, 6);

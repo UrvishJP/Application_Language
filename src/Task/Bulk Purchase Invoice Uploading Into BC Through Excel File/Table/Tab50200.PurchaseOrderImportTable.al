@@ -9,7 +9,7 @@ table 50200 "Purchase Order Import Table"
         field(1; "Imported Vendor No."; Code[30])
         {
             Caption = 'Imported Vendor No.';
-            TableRelation = Vendor;
+            TableRelation = Vendor."No.";
 
         }
         field(2; "Imported Item No."; Code[30])

@@ -213,6 +213,8 @@ page 50201 "Purchase Order Import Page"
 
                 begin
                     ValidateData();
+                    Rec.Reset();
+                    Rec.SetRange("Batch Name", BName);
                     ImpBatchs.Get(BName);
                     ImpBatchs.TestField("Processing CodeUnit");
                     Codeunit.Run(ImpBatchs."Processing CodeUnit", Rec);
