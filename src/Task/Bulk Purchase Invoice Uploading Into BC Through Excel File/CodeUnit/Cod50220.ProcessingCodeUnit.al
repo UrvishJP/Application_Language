@@ -1,4 +1,4 @@
-codeunit 50220 "Processing CodeUnit"
+codeunit 50226 "Processing CodeUnit"
 {
 
     TableNo = "Purchase Order Import Table";
@@ -30,12 +30,9 @@ codeunit 50220 "Processing CodeUnit"
 
                 Line := IncStr(NoSeries_rec.GetLastNoUsed());
 
-                if not (Validate_rec.ChangeStyle(rec)) then begin
+                if NOT (Validate_rec.ChangeStyle(rec)) then begin
 
-                    if CheckBeforeInsert(rec, PurchLine_rec, PurchHeader_rec) then
-                        Message('already exist')
-
-                    else begin
+                    if NOT CheckBeforeInsert(rec, PurchLine_rec, PurchHeader_rec) then begin
 
                         PurchHeader_rec.Init();
                         PurchHeader_rec."No." := Line;
@@ -74,13 +71,13 @@ codeunit 50220 "Processing CodeUnit"
                     end;
 
                     rec.Delete();
-
-                    Page.Run(page::"Purchase Order", PurchHeader_rec);
+                    
+                    Message('Purchase Order No. %1 of Item No. %2 has been created.', rec."Imported Vendor No.", rec."Imported Item No.");
 
                 end
 
                 else begin
-                    Message('%1 not created', rec."Imported Vendor No.");
+                    Message('Purchase Order No. %1 of Item No. %2 not created, please check errors.', rec."Imported Vendor No.", rec."Imported Item No.");
                 end;
 
             until rec.Next() = 0;
@@ -126,7 +123,6 @@ codeunit 50220 "Processing CodeUnit"
                     ReleasePurchDoc.PerformManualRelease(PurchHeader_rec);
 
                 exit(true);
-
             end;
         end;
     end;

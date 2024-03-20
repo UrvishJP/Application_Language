@@ -1,4 +1,4 @@
-codeunit 50210 "Error and Warning CodeUnit"
+codeunit 50215 "Error and Warning CodeUnit"
 {
     TableNo = "Purchase Order Import Table";
     trigger OnRun()

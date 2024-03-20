@@ -7,19 +7,23 @@ codeunit 50230 "CodeUnit Management"
     end;
 
     procedure ManageCodeUnit(Read: Integer; Validate: Integer; Processing: Integer)
-
     var
         ImpBatch: Record "Purchase Order Import Batches";
-
     begin
-        if ImpBatch.IsEmpty() then begin
+        if not ImpBatch.FindFirst() then begin
             ImpBatch.Init();
-            ImpBatch.Description := 'Default';
             ImpBatch.Name := 'DEFAULT';
+            ImpBatch.Description := 'Default';
             ImpBatch."Reading CodeUnit" := Read;
             ImpBatch."Validation CodeUnit" := Validate;
             ImpBatch."Processing CodeUnit" := Processing;
             ImpBatch.Insert();
-        end;
+        end else
+            repeat
+                ImpBatch."Reading CodeUnit" := Read;
+                ImpBatch."Validation CodeUnit" := Validate;
+                ImpBatch."Processing CodeUnit" := Processing;
+                ImpBatch.Modify();
+            until ImpBatch.Next() = 0;
     end;
 }

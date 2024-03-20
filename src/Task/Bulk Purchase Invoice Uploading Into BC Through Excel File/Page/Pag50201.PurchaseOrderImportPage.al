@@ -308,6 +308,4 @@ page 50201 "Purchase Order Import Page"
         ImpBatchs: Record "Purchase Order Import Batches";
         BName: Text[50];
         StyleExpresion: Text[50];
-
-
 }

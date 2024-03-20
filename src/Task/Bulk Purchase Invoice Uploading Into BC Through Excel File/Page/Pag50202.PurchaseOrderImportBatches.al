@@ -5,7 +5,7 @@ page 50202 "Purchase Order Import Batches"
     PageType = List;
     SourceTable = "Purchase Order Import Batches";
     UsageCategory = Lists;
-    
+
     layout
     {
         area(content)
@@ -35,5 +35,4 @@ page 50202 "Purchase Order Import Batches"
             }
         }
     }
-
 }
