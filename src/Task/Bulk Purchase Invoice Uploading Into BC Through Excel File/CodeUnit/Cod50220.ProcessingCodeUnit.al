@@ -30,7 +30,7 @@ codeunit 50226 "Processing CodeUnit"
 
                 Line := IncStr(NoSeries_rec.GetLastNoUsed());
 
-                if NOT (Validate_rec.ChangeStyle(rec)) then begin
+                if NOT Validate_rec.ChangeStyle(rec) then begin
 
                     if NOT CheckBeforeInsert(rec, PurchLine_rec, PurchHeader_rec) then begin
 
@@ -65,19 +65,17 @@ codeunit 50226 "Processing CodeUnit"
 
                             if setup."Release Order Upon Create" = true then
                                 ReleasePurchDoc.PerformManualRelease(PurchHeader_rec);
-
+                                
                         end;
-
                     end;
 
                     rec.Delete();
-                    
                     Message('Purchase Order No. %1 of Item No. %2 has been created.', rec."Imported Vendor No.", rec."Imported Item No.");
 
                 end
 
                 else begin
-                    Message('Purchase Order No. %1 of Item No. %2 not created, please check errors.', rec."Imported Vendor No.", rec."Imported Item No.");
+                    Message('Purchase Order No. %1 of Item No. %2 not created, please validate the data.', rec."Imported Vendor No.", rec."Imported Item No.");
                 end;
 
             until rec.Next() = 0;
