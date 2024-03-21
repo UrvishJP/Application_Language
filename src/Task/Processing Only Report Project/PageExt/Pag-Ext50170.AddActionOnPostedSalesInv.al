@@ -1,6 +1,6 @@
 pageextension 50170 "Add Action On Posted Sales Inv" extends "Posted Sales Invoices"
 {
-    
+
 
     actions
     {
