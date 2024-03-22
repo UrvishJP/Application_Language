@@ -1,4 +1,3 @@
-
 report 50250 "Sales Register"
 {
     ApplicationArea = All;
@@ -10,6 +9,11 @@ report 50250 "Sales Register"
     {
         dataitem(SalesInvLine; "Sales Invoice Line")
         {
+            trigger OnPreDataItem()
+
+            begin
+                SetFilter("Posting Date", '%1..%2', StartingDate, EndingDate);
+            end;
 
             trigger OnAfterGetRecord()
             var
@@ -61,13 +65,12 @@ report 50250 "Sales Register"
 
                 if ShippingRec.Get(SalesInvHeader."Shipping Agent Code") then
                     Transport_Name := ShippingRec.Name;
-                    
+
                 CreateBody();
 
             end;
 
         }
-
 
     }
 
@@ -105,57 +108,6 @@ report 50250 "Sales Register"
     begin
         CreateExcelReport();
     end;
-
-
-    var
-        TempExcelBuffer: Record "Excel Buffer" temporary;
-        CustNoFilter: Text[250];
-        ItemNoFilter: Text[250];
-        ItemCategoryFilter: Text[250];
-        DocumentTypeFilter: option Invoice,"Credit Memo";
-        InvoiceNoFilter: Text[250];
-        SalesInvHeader: Record "Sales Invoice Header";
-        SerialNo: Integer;
-        StartingDate, EndingDate : Date;
-        PostingDate: Date;
-        DocNo: Text[50];
-        SalesPersonCode: Code[20];
-        SalesPersonName: Text[50];
-        CustomerNo: Code[20];
-        CustomerName: Text[50];
-        ShipToName: Text[50];
-        City: Text[50];
-        Country_name: Text[30];
-        State_Description: Code[10];
-        Customer_Zone: Code[10];
-        Customer_Region: Code[10];
-        GST_Customer_Type: Text[50];
-        GSTIN: Code[20];
-        "Invoice No.": Code[20];
-        Location_Code: Code[10];
-        Bin_Code: Code[20];
-        "P.A.N. No._": Code[20];
-        Transport_Name: Text[50];
-        "L.R. No.": Code[20];
-        "Vehicle No.": Code[20];
-        "Vehicle Type.": Code[20];
-        ExternalDocNo: Code[20];
-        "HSN/SAC Code.": Code[10];
-        "Item No.": Code[10];
-        "Item Name": Text[50];
-        UOM: Text[50];
-        "Item Category": Code[20];
-        "Item Variant": Code[20];
-        SalesQty: Decimal;
-        UnitPrice: Decimal;
-        ItemTotalPrice: Decimal;
-        LineDiscount: Decimal;
-        InvoiceDiscount: Decimal;
-        Total: Decimal;
-        CGSTAmount: Decimal;
-        SGSTAmount: Decimal;
-        IGSTAmount: Decimal;
-        GSTAmount: Decimal;
 
 
     local procedure CreateHeader()
@@ -299,6 +251,58 @@ report 50250 "Sales Register"
         IGSTAmount := 0;
         GSTAmount := 0;
     end;
+
+
+    var
+        TempExcelBuffer: Record "Excel Buffer" temporary;
+        CustNoFilter: Text[250];
+        ItemNoFilter: Text[250];
+        ItemCategoryFilter: Text[250];
+        DocumentTypeFilter: option Invoice,"Credit Memo";
+        InvoiceNoFilter: Text[250];
+        SalesInvHeader: Record "Sales Invoice Header";
+        SerialNo: Integer;
+        StartingDate, EndingDate : Date;
+        PostingDate: Date;
+        DocNo: Text[50];
+        SalesPersonCode: Code[20];
+        SalesPersonName: Text[50];
+        CustomerNo: Code[20];
+        CustomerName: Text[50];
+        ShipToName: Text[50];
+        City: Text[50];
+        Country_name: Text[30];
+        State_Description: Code[10];
+        Customer_Zone: Code[10];
+        Customer_Region: Code[10];
+        GST_Customer_Type: Text[50];
+        GSTIN: Code[20];
+        "Invoice No.": Code[20];
+        Location_Code: Code[10];
+        Bin_Code: Code[20];
+        "P.A.N. No._": Code[20];
+        Transport_Name: Text[50];
+        "L.R. No.": Code[20];
+        "Vehicle No.": Code[20];
+        "Vehicle Type.": Code[20];
+        ExternalDocNo: Code[20];
+        "HSN/SAC Code.": Code[10];
+        "Item No.": Code[10];
+        "Item Name": Text[50];
+        UOM: Text[50];
+        "Item Category": Code[20];
+        "Item Variant": Code[20];
+        SalesQty: Decimal;
+        UnitPrice: Decimal;
+        ItemTotalPrice: Decimal;
+        LineDiscount: Decimal;
+        InvoiceDiscount: Decimal;
+        Total: Decimal;
+        CGSTAmount: Decimal;
+        SGSTAmount: Decimal;
+        IGSTAmount: Decimal;
+        GSTAmount: Decimal;
+
 }
 
 
