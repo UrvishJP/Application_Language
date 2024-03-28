@@ -68,15 +68,15 @@ codeunit 50226 "Processing CodeUnit"
                         end;
                     end;
 
-                    rec.Delete();
-                    Message('Purchase Order No. %1 of Item No. %2 has been created.', rec."Imported Vendor No.", rec."Imported Item No.");
+                    Rec.Delete();
+                    Message('Purchase Order No. %1 of Item No. %2 has been created.', Rec."Imported Vendor No.", Rec."Imported Item No.");
 
                 end
 
                 else
-                    Message('Purchase Order No. %1 of Item No. %2 not created, please validate the data.', rec."Imported Vendor No.", rec."Imported Item No.");
+                    Message('Purchase Order No. %1 of Item No. %2 not created, please validate the data.', Rec."Imported Vendor No.", Rec."Imported Item No.");
 
-            until rec.Next() = 0;
+            until Rec.Next() = 0;
         end;
     end;
 

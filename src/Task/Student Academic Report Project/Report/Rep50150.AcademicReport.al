@@ -71,6 +71,7 @@ report 50150 "Academic Report"
         }
 
     }
+    
 
     rendering
     {

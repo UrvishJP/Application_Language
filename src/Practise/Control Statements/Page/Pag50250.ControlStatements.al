@@ -4,6 +4,7 @@ page 50250 "Control Statements"
     Caption = 'Control Statements';
     PageType = Card;
     SourceTable = "Control Statements Table";
+    UsageCategory = Lists;
 
     layout
     {

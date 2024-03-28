@@ -5,14 +5,6 @@ table 50110 DemoTable
     LookupPageId = DemoPage;
 
 
-
-    // DataPerCompany = false;
-    // PasteIsValid = false;
-    // InherentEntitlements =
-    // InherentPermissions =
-    // Permissions = tabledata "AAD Application" = 
-
-
     fields
     {
         field(1; Urvish; Text[20])
